@@ -28,12 +28,25 @@ class Ui_Dialog(object):
         sizePolicy.setHeightForWidth(self.listWidget.sizePolicy().hasHeightForWidth())
         self.listWidget.setSizePolicy(sizePolicy)
         self.listWidget.setMinimumSize(QtCore.QSize(500, 0))
+        font = QtGui.QFont()
+        font.setFamily("Tahoma")
+        font.setPointSize(-1)
+        font.setBold(False)
+        font.setItalic(False)
+        self.listWidget.setFont(font)
+        self.listWidget.setStyleSheet("\n"
+                                      "font: 36pt \"Tahoma\";\n"
+                                      "color:White; \n"
+                                      "font-size: 45px\n"
+                                      "")
         self.listWidget.setObjectName("listWidget")
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
         self.verticalLayout_2.addWidget(self.listWidget, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.help_button = QtWidgets.QPushButton(parent=Dialog)
-        self.help_button.setMinimumSize(QtCore.QSize(400, 0))
-        self.help_button.setMaximumSize(QtCore.QSize(450, 55))
-        self.help_button.setStyleSheet("QPushButton {\n"
+        self.refresh_button = QtWidgets.QPushButton(parent=Dialog)
+        self.refresh_button.setMinimumSize(QtCore.QSize(400, 0))
+        self.refresh_button.setMaximumSize(QtCore.QSize(450, 55))
+        self.refresh_button.setStyleSheet("QPushButton {\n"
                                        "    font: 700 16pt \"Bell MT\";\n"
                                        "background-color: rgb(162, 176, 165);\n"
                                        "color:White; \n"
@@ -51,8 +64,8 @@ class Ui_Dialog(object):
                                        "background-color: rgb(57, 112, 70);\n"
                                        "}\n"
                                        "")
-        self.help_button.setObjectName("help_button")
-        self.verticalLayout_2.addWidget(self.help_button, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.refresh_button.setObjectName("refresh_button")
+        self.verticalLayout_2.addWidget(self.refresh_button, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.about_us_button = QtWidgets.QPushButton(parent=Dialog)
@@ -95,5 +108,5 @@ class Ui_Dialog(object):
         self.label.setToolTip(_translate("Dialog", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
         self.label.setText(_translate("Dialog",
                                       "<html><head/><body><p align=\"center\"><span style=\" font-size:34pt;\">💾Cписок Файлов💾</span></p></body></html>"))
-        self.help_button.setText(_translate("Dialog", "ОБНОВИТЬ"))
+        self.refresh_button.setText(_translate("Dialog", "ОБНОВИТЬ"))
         self.about_us_button.setText(_translate("Dialog", "ВЫЙТИ"))

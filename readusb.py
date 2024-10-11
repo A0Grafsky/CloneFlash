@@ -45,10 +45,10 @@ def main():
     usb_drives = info_drive_usb()
     if usb_drives:
         # Читаем файлы с первого найденного USB-диска
-        print(f"Список фалов с {usb_drives}")
+        # print(f"Список фалов с {usb_drives}")
         return list_files_from_usb(info_drive_usb())
     else:
-        print("USB-накопители не найдены.")
+        return f'USB накопитель не найден'
 
 
 if __name__ == "__main__":

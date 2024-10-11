@@ -114,7 +114,7 @@ class Ui_MainWindow(object):
                                        "background-color: rgb(57, 112, 70);\n"
                                        "}\n"
                                        "")
-        self.help_button.setObjectName("help_button")
+        self.help_button.setObjectName("refresh_button")
         self.verticalLayout.addWidget(self.help_button)
         self.about_us_button = QtWidgets.QPushButton(parent=self.frame)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)

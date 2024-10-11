@@ -53,6 +53,26 @@ font-size: 45px
          <height>0</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Tahoma</family>
+         <pointsize>-1</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+font: 36pt &quot;Tahoma&quot;;
+color:White; 
+font-size: 45px
+</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Конспект.pdf</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item alignment="Qt::AlignHCenter">
@@ -68,6 +88,14 @@ font-size: 45px
          <width>450</width>
          <height>55</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Bell MT</family>
+         <pointsize>16</pointsize>
+         <italic>false</italic>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
