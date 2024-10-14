@@ -37,7 +37,7 @@ class Ui_Dialog(object):
         self.listWidget.setStyleSheet("\n"
                                       "font: 36pt \"Tahoma\";\n"
                                       "color:White; \n"
-                                      "font-size: 45px\n"
+                                      "font-size: 22px\n"
                                       "")
         self.listWidget.setObjectName("listWidget")
         item = QtWidgets.QListWidgetItem()

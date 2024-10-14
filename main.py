@@ -21,6 +21,8 @@ class Dialog(QDialog):
         self.refreshButton = self.findChild(QPushButton, 'refresh_button')
         self.refreshButton.clicked.connect(self.show_list_file)
 
+
+
     def show_list_file(self):
         files = main()
         self.listWidget.clear()

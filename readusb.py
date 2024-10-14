@@ -12,23 +12,6 @@ def info_drive_usb():
                 return disk.Caption
 
 
-# Чтение данных с флешки
-# def read_files_from_usb(usb_drive):
-#     if not os.path.exists(usb_drive):
-#         print(f"USB drive {usb_drive} не найден.")
-#         return
-#     for root, dirs, files in os.walk(usb_drive):
-#         for file in files:
-#             file_path = os.path.join(root, file)
-#             print(f"Файл: {file_path}")
-#             try:
-#                 with open(file_path, 'r', encoding='utf-8') as f:
-#                     content = f.read()
-#                     print(content)  # Обработка данных по вашему усмотрению
-#             except Exception as e:
-#                 print(f"Не удалось прочитать файл {file_path}: {e}")
-
-
 def list_files_from_usb(usb_drive):
     mas_files = []
     if not os.path.exists(usb_drive):
@@ -37,7 +20,10 @@ def list_files_from_usb(usb_drive):
     # Проходим по всем директориям и файлам на USB
     for root, dirs, files in os.walk(usb_drive):
         for file in files:
-            mas_files.append(file)
+            file_path = os.path.join(root, file)
+            file_size = os.path.getsize(file_path)
+            full_file = f'{file} | {file_size}КБ'
+            mas_files.append(full_file)
     return mas_files
 
 
