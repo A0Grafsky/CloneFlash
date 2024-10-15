@@ -1,5 +1,4 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
-from interface.flesh_menu import Ui_Dialog
+from PyQt6 import QtCore, QtWidgets
 
 
 class Ui_MainWindow(object):
@@ -141,7 +140,7 @@ class Ui_MainWindow(object):
                                            "background-color: rgb(57, 112, 70);\n"
                                            "}\n"
                                            "")
-        self.about_us_button.setObjectName("about_us_button")
+        self.about_us_button.setObjectName("exit_to_flesh")
         self.verticalLayout.addWidget(self.about_us_button)
         self.verticalLayout_2.addLayout(self.verticalLayout)
         self.verticalLayout_3.addLayout(self.verticalLayout_2)
