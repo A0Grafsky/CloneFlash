@@ -117,7 +117,6 @@ class Ui_Dialog(object):
         __sortingEnabled = self.listWidget.isSortingEnabled()
         self.listWidget.setSortingEnabled(False)
         item = self.listWidget.item(0)
-        item.setText(_translate("Dialog", "Конспект.pdf"))
         self.listWidget.setSortingEnabled(__sortingEnabled)
         self.refresh_button.setText(_translate("Dialog", "ОБНОВИТЬ"))
         self.exit_to_flesh.setText(_translate("Dialog", "ВЫЙТИ"))

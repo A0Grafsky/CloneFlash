@@ -166,6 +166,13 @@ background-color: rgb(57, 112, 70);
        <height>0</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true">
+font: 36pt &quot;Tahoma&quot;;
+color:White; 
+font-size: 45px
+</string>
+     </property>
     </widget>
    </item>
   </layout>
