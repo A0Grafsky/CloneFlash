@@ -2,6 +2,7 @@ import imaplib
 import email
 from email.header import decode_header
 import re
+from datetime import datetime
 
 # # Сохраняем файл в текущую директорию
 # with open(filename, 'wb') as f:
@@ -37,9 +38,21 @@ class EmailClient:
                     return email.message_from_bytes(msg[0][1])
         return None
 
-    # Получение списка вложений
     def extract_attachments(self, msg):
         list_files_from_email = []
+
+        # Получаем время отправления
+        date_header = msg.get('date')
+        if date_header:
+            # Парсим дату
+            try:
+                date_sent = email.utils.parsedate_to_datetime(date_header)
+            except Exception as e:
+                print(f"Ошибка при парсинге даты: {e}")
+                date_sent = None
+        else:
+            date_sent = None
+
         # Проходимся по сообщению
         for part in msg.walk():
             if part.get_content_disposition() == 'attachment':
@@ -52,7 +65,20 @@ class EmailClient:
                     # Убираем лишние символы
                     filename = re.sub(r'[<>:"/\\|?*]', '_', filename)
                     list_files_from_email.append(filename)
-        return list_files_from_email
+
+        return list_files_from_email, date_sent
+
+    def check_emails_message(self, data: tuple):
+        date_message = str(data[1])
+        time_message = date_message[date_message.find(' ') + 1:date_message.rfind('+')]
+        time_now_date = str(datetime.now())
+        time_now_time = time_now_date[time_now_date.find(' ') + 1:time_now_date.rfind('.')]
+        if (date_message[:date_message.find(' ')] == time_now_date[:time_now_date.find(' ')] \
+            and abs(int(time_message[time_message.find(':') + 1:time_message.rfind(':')]) -
+                    int(time_now_time[time_now_time.find(':') + 1:time_now_time.rfind(':')]))) <= 1:
+            return data[0]
+        else:
+            return f'Сообщение не найдено'
 
     # Для выхода из соединения с почтовым ящиком
     def logout(self):
