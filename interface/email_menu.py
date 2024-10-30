@@ -17,16 +17,13 @@ class UiDialogEmailTest(object):
                                  "")
         self.label.setObjectName("label")
         self.verticalLayout_2.addWidget(self.label)
-        self.widget_email = QtWidgets.QWidget(parent=Dialog)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.widget_email.sizePolicy().hasHeightForWidth())
-        self.widget_email.setSizePolicy(sizePolicy)
-        self.widget_email.setMinimumSize(QtCore.QSize(0, 40))
-        self.widget_email.setStyleSheet("background-color:rgb(63, 63, 63)")
-        self.widget_email.setObjectName("widget_email")
-        self.verticalLayout_2.addWidget(self.widget_email)
+        self.label_2 = QtWidgets.QLabel(parent=Dialog)
+        self.label_2.setStyleSheet("font: 700 16pt \"Bell MT\";\n"
+                                   "color:White; \n"
+                                   "font-size: 40px\n"
+                                   "")
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout_2.addWidget(self.label_2, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayout.addLayout(self.verticalLayout_2, 0, 0, 1, 1)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
@@ -111,9 +108,7 @@ class UiDialogEmailTest(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.label.setText(_translate("Dialog",
-                                      "<html><head/><body><p align=\"center\"><span style=\" "
-                                      "font-size:24pt;\">ОТПРАВТЕ ДОКУМЕНТ </span></p><p align=\"center\"><span "
-                                      "style=\" font-size:24pt;\">НА ЭТУ ПОЧТУ</span></p></body></html>"))
-        self.widget_email.setWhatsThis(_translate("Dialog", "<html><head/><body><p>ccxzcxzc</p></body></html>"))
+                                      "<html><head/><body><p align=\"center\"><span style=\" font-size:24pt;\">ОТПРАВТЕ ДОКУМЕНТ </span></p><p align=\"center\"><span style=\" font-size:24pt;\">НА ЭТУ ПОЧТУ</span></p></body></html>"))
+        self.label_2.setText(_translate("Dialog", "ВАША ПОЧТА"))
         self.refresh_button_email.setText(_translate("Dialog", "ОБНОВИТЬ"))
         self.exit_button.setText(_translate("Dialog", "ВЫЙТИ"))
