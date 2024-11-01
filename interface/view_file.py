@@ -74,7 +74,7 @@ class ViewPrintObject2(object):
                                                       "background-color: rgb(57, 112, 70);\n"
                                                       "}\n"
                                                       "")
-        self.exit_button_from_list_file.setObjectName("exit_button_from_list_file")
+        self.exit_button_from_list_file.setObjectName("exit_button_from_print")
         self.verticalLayout.addWidget(self.exit_button_from_list_file, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayout_2.addLayout(self.verticalLayout, 2, 1, 1, 1)
         self.gridLayout = QtWidgets.QGridLayout()
@@ -150,7 +150,7 @@ class ViewPrintObject2(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.file_view.setText(_translate("Form", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
-        self.print_button.setText(_translate("Form", "Печать"))
+        self.print_button.setText(_translate("Form", "ПЕЧАТЬ"))
         self.exit_button_from_list_file.setText(_translate("Form", "ВЫЙТИ"))
-        self.left_button.setText(_translate("Form", "Назад"))
-        self.right_button.setText(_translate("Form", "Далее"))
+        self.left_button.setText(_translate("Form", "НАЗАД"))
+        self.right_button.setText(_translate("Form", "ДАЛЕЕ"))

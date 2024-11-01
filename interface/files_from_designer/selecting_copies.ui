@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>674</width>
+    <height>666</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:rgb(63, 63, 63)</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_5">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="0" column="0" alignment="Qt::AlignVCenter">
+      <widget class="QLabel" name="label">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 700 16pt &quot;Bell MT&quot;;
+color:White; 
+font-size: 45px
+</string>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:34pt;&quot;&gt;КОЛИЧЕСТВО КОПИЙ&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignTop">
+        <widget class="QLabel" name="price_display_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 700 16pt &quot;Bell MT&quot;;
+color:White; 
+font-size: 85px
+</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="right_button_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>180</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>180</width>
+             <height>70</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+	font: 700 16pt &quot;Bell MT&quot;;
+background-color: rgb(162, 176, 165);
+color:White; 
+border: 2px solid #000000; 
+border-radius: 7px;
+widht: 20px;
+height: 75px;
+}
+
+QPushButton:hover{
+background-color: rgb(123, 181, 136);
+}
+
+QPushButton:pressed {
+background-color: rgb(57, 112, 70);
+}
+</string>
+           </property>
+           <property name="text">
+            <string>Меньше</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="right_button_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>180</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>180</width>
+             <height>70</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+	font: 700 16pt &quot;Bell MT&quot;;
+background-color: rgb(162, 176, 165);
+color:White; 
+border: 2px solid #000000; 
+border-radius: 7px;
+widht: 20px;
+height: 75px;
+}
+
+QPushButton:hover{
+background-color: rgb(123, 181, 136);
+}
+
+QPushButton:pressed {
+background-color: rgb(57, 112, 70);
+}
+</string>
+           </property>
+           <property name="text">
+            <string>БОЛЬШЕ</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <layout class="QGridLayout" name="gridLayout_4">
+     <item row="0" column="0">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="2" column="0" alignment="Qt::AlignHCenter|Qt::AlignTop">
+        <widget class="QLabel" name="price_display">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"> 
+font: 600 36pt &quot;Sitka Heading Semibold&quot;;
+color:White; 
+font-size: 65px;
+
+</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;100.0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+        <widget class="QLabel" name="price">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 700 16pt &quot;Bell MT&quot;;
+color:White; 
+font-size: 45px
+</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;ЦЕНА&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+        <widget class="QPushButton" name="right_button">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>300</width>
+           <height>70</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	font: 700 16pt &quot;Bell MT&quot;;
+background-color: rgb(162, 176, 165);
+color:White; 
+border: 2px solid #000000; 
+border-radius: 7px;
+widht: 20px;
+height: 75px;
+}
+
+QPushButton:hover{
+background-color: rgb(123, 181, 136);
+}
+
+QPushButton:pressed {
+background-color: rgb(57, 112, 70);
+}
+</string>
+         </property>
+         <property name="text">
+          <string>Оплатить</string>
+         </property>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+        <widget class="QPushButton" name="exit_button_from_list_file">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>500</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>500</width>
+           <height>54</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	font: 700 16pt &quot;Bell MT&quot;;
+background-color: rgb(76, 112, 84);
+color:White; 
+border: 2px solid #000000; 
+border-radius: 7px;
+widht: 10px;
+height: 50px;
+}
+
+QPushButton:hover{
+background-color: rgb(123, 181, 136);
+}
+
+QPushButton:pressed {
+background-color: rgb(57, 112, 70);
+}
+</string>
+         </property>
+         <property name="text">
+          <string>ВЫЙТИ</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

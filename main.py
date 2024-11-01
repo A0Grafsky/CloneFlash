@@ -15,9 +15,12 @@ from interface.menu import Ui_MainWindow
 from interface.flesh_menu import Ui_Dialog
 from interface.email_menu import UiDialogEmailTest
 from interface.view_file import ViewPrintObject2
+from interface.selecting_copies import SelectCopy
+
 from other_logic.email_read import EmailClient
 from other_logic.readusb import main, info_drive_usb, full_path_from_file
 from other_logic.convert_for_docx import convert_doc_in_pdf
+from other_logic.printer_module import print_file
 
 
 # Создаем класс для работы с диалоговыми окнами
@@ -140,12 +143,15 @@ class ViewPrint(QDialog):
         self.ui_mail.setupUi(self)
         self.showFullScreen()
 
-        self.exit_button = self.findChild(QPushButton, 'exit_button_from_list_file')
+        self.exit_button = self.findChild(QPushButton, 'exit_button_from_print')
         self.exit_button.clicked.connect(self.exit_in_list_file)
         self.left_button = self.findChild(QPushButton, 'left_button')
         self.left_button.clicked.connect(self.show_previous_page)
         self.right_button = self.findChild(QPushButton, 'right_button')
         self.right_button.clicked.connect(self.show_next_page)
+
+        self.print_button = self.findChild(QPushButton, 'print_button')
+        self.print_button.clicked.connect(self.open_print_window)
 
         # self.image_label = self.ui_mail.file_view
         self.image_label = self.findChild(QLabel, 'file_view')
@@ -221,6 +227,62 @@ class ViewPrint(QDialog):
         except Exception as e:
             print(f"Произошла ошибка при очистке папки: {e}")
             self.close()
+
+    # Открытик окна оплаты
+    def open_print_window(self):
+        print_window = PriceAndCopy(len(self.image_pages))
+        print_window.exec()
+
+
+# Окно выбора копий и оплаты
+class PriceAndCopy(QDialog):
+    def __init__(self, image_pages):
+        super().__init__()
+        self.ui_mail = SelectCopy()
+        self.ui_mail.setupUi(self)
+        self.showFullScreen()
+
+        self.exit_button = self.findChild(QPushButton, 'exit_button_from_print')
+        self.exit_button.clicked.connect(self.exit_in_view)
+
+        self.up_button = self.findChild(QPushButton, 'right_button')
+        self.up_button.clicked.connect(self.up_number_for_copy)
+
+        self.down_button = self.findChild(QPushButton, 'left_button')
+        self.down_button.clicked.connect(self.down_number_for_copy)
+
+        self.number_copy = self.findChild(QLabel, 'price_display_2')
+        self.text_number = self.number_copy.text()[self.number_copy.text().find('">')+2:self.number_copy.text().rfind("</p")]
+        self.number_copy.setText(self.text_number)
+
+        load_dotenv()
+        self.price_copy = os.getenv('PRICE_COPY')
+        self.price_display = self.findChild(QLabel, 'price_display')
+        self.price_copy = str(int(self.price_copy) * image_pages)
+        self.price_display.setText(self.price_copy)
+
+    # Выход из меню оплаты
+    def exit_in_view(self):
+        self.close()
+
+    # Добавить копии
+    def up_number_for_copy(self):
+        if int(self.text_number) <= 4:
+            self.text_number = str(int(self.text_number) + 1)
+            self.number_copy.setText(self.text_number)
+            self.change_price()
+
+    # Убрать копии
+    def down_number_for_copy(self):
+        if int(self.text_number) >= 2:
+            self.text_number = str(int(self.text_number) - 1)
+            self.number_copy.setText(self.text_number)
+            self.change_price()
+
+    # Работа с ценами
+    def change_price(self):
+        new_price = int(self.price_copy) * int(self.text_number)
+        self.price_display.setText(str(new_price))
 
 
 # Создаем класс для работы с основным окном
