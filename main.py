@@ -1,26 +1,34 @@
+# Основные библиотеки
 import sys
 import os
 import datetime
-import fitz  # PyMuPDF
+import time
+import fitz
 import shutil
-
 from dotenv import load_dotenv
 from docx import Document
 
+# PyQt6
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QDialog,
                              QListWidget, QPushButton, QLabel, QGraphicsView, QFileDialog)
 from PyQt6.QtGui import QPixmap
+from PyQt6.QtCore import QTimer
 
+# Designer
 from interface.menu import Ui_MainWindow
 from interface.flesh_menu import Ui_Dialog
 from interface.email_menu import UiDialogEmailTest
 from interface.view_file import ViewPrintObject2
 from interface.selecting_copies import SelectCopy
+from interface.check_buy import CheckBuyForPrint
+from interface.finish_menu import FinishDI
 
+# Сделанные модули
 from other_logic.email_read import EmailClient
 from other_logic.readusb import main, info_drive_usb, full_path_from_file
 from other_logic.convert_for_docx import convert_doc_in_pdf
 from other_logic.printer_module import print_file
+from other_logic.yoo_money_logic import buy_funct
 
 
 # Создаем класс для работы с диалоговыми окнами
@@ -100,6 +108,7 @@ class DialogEmail(QDialog):
         self.exit_button = self.findChild(QPushButton, 'exit_button')
         self.exit_button.clicked.connect(self.exit_in_main)
 
+    # Показ файлов из сообщения
     def show_list_file_message(self):
         client = self.client
         self.listWidget.clear()
@@ -113,6 +122,7 @@ class DialogEmail(QDialog):
                     self.listWidget.addItem('Сообщение не найдено')
                     break
 
+    # Открытие окна просмотра
     def open_view_file(self, item):
         if item.text() != 'Сообщение не найдено':
             file = item.text().strip()
@@ -125,6 +135,7 @@ class DialogEmail(QDialog):
         window = ExpenseTracker()
         window.show()
 
+    # Регистрация почты
     def login_in_email(self):
         load_dotenv()
         username = os.getenv('LOGIN_NAME')
@@ -143,6 +154,8 @@ class ViewPrint(QDialog):
         self.ui_mail.setupUi(self)
         self.showFullScreen()
 
+        self.file_path = filepath
+
         self.exit_button = self.findChild(QPushButton, 'exit_button_from_print')
         self.exit_button.clicked.connect(self.exit_in_list_file)
         self.left_button = self.findChild(QPushButton, 'left_button')
@@ -153,7 +166,6 @@ class ViewPrint(QDialog):
         self.print_button = self.findChild(QPushButton, 'print_button')
         self.print_button.clicked.connect(self.open_print_window)
 
-        # self.image_label = self.ui_mail.file_view
         self.image_label = self.findChild(QLabel, 'file_view')
         self.image_label.setScaledContents(True)
 
@@ -164,7 +176,6 @@ class ViewPrint(QDialog):
         # Папка для фоток
         load_dotenv()
         self.folder = os.getenv('DIR_NAME')
-
         self.load_file(filepath)
 
     def load_file(self, filepath):
@@ -228,38 +239,48 @@ class ViewPrint(QDialog):
             print(f"Произошла ошибка при очистке папки: {e}")
             self.close()
 
-    # Открытик окна оплаты
+    # Открытие окна оплаты
     def open_print_window(self):
-        print_window = PriceAndCopy(len(self.image_pages))
+        print_window = PriceAndCopy(len(self.image_pages), self.file_path)
         print_window.exec()
 
 
 # Окно выбора копий и оплаты
 class PriceAndCopy(QDialog):
-    def __init__(self, image_pages):
-        super().__init__()
-        self.ui_mail = SelectCopy()
-        self.ui_mail.setupUi(self)
-        self.showFullScreen()
+    def __init__(self, image_pages, file_path):
+        try:
+            super().__init__()
+            self.ui_mail = SelectCopy()
+            self.ui_mail.setupUi(self)
+            self.showFullScreen()
 
-        self.exit_button = self.findChild(QPushButton, 'exit_button_from_print')
-        self.exit_button.clicked.connect(self.exit_in_view)
+            self.file_path = file_path
 
-        self.up_button = self.findChild(QPushButton, 'right_button')
-        self.up_button.clicked.connect(self.up_number_for_copy)
+            self.buy_button = self.findChild(QPushButton, 'buy_button')
+            self.buy_button.clicked.connect(self.open_check_buy_window)
 
-        self.down_button = self.findChild(QPushButton, 'left_button')
-        self.down_button.clicked.connect(self.down_number_for_copy)
+            self.exit_button = self.findChild(QPushButton, 'exit_button_from_print')
+            self.exit_button.clicked.connect(self.exit_in_view)
 
-        self.number_copy = self.findChild(QLabel, 'price_display_2')
-        self.text_number = self.number_copy.text()[self.number_copy.text().find('">')+2:self.number_copy.text().rfind("</p")]
-        self.number_copy.setText(self.text_number)
+            self.up_button = self.findChild(QPushButton, 'right_button')
+            self.up_button.clicked.connect(self.up_number_for_copy)
 
-        load_dotenv()
-        self.price_copy = os.getenv('PRICE_COPY')
-        self.price_display = self.findChild(QLabel, 'price_display')
-        self.price_copy = str(int(self.price_copy) * image_pages)
-        self.price_display.setText(self.price_copy)
+            self.down_button = self.findChild(QPushButton, 'left_button')
+            self.down_button.clicked.connect(self.down_number_for_copy)
+
+            self.number_copy = self.findChild(QLabel, 'price_display_2')
+            self.text_number = self.number_copy.text()[
+                               self.number_copy.text().find('">') + 2:self.number_copy.text().rfind("</p")]
+            self.number_copy.setText(self.text_number)
+
+            load_dotenv()
+            self.price_copy = os.getenv('PRICE_COPY')
+            self.price_display = self.findChild(QLabel, 'price_display')
+            self.price_copy = str(int(self.price_copy) * image_pages)
+            self.price_display.setText(self.price_copy)
+
+        except Exception as e:
+            print(e)
 
     # Выход из меню оплаты
     def exit_in_view(self):
@@ -283,6 +304,108 @@ class PriceAndCopy(QDialog):
     def change_price(self):
         new_price = int(self.price_copy) * int(self.text_number)
         self.price_display.setText(str(new_price))
+
+    def open_check_buy_window(self):
+        # функция по оплате тут
+        amount = self.price_display.text()
+        check_buy_window = CheckBuy(amount, self.file_path)
+        check_buy_window.exec()
+
+
+class CheckBuy(QDialog):
+    def __init__(self, amount, file_path):
+        super().__init__()
+        self.ui_mail = CheckBuyForPrint()
+        self.ui_mail.setupUi(self)
+        self.showFullScreen()
+        try:
+            # Виджеты
+            self.qrcode_display = self.findChild(QLabel, 'qrcode_photo')
+            self.qrcode_display.setScaledContents(True)
+
+            self.file_path = file_path
+
+            self.status_bar = self.findChild(QLabel, 'status_bar')
+
+            # Вытаскиваем url и id оплаты
+            payment_url, payment_id = buy_funct.get_payment_url(amount)
+
+            # Генерация и загрузка QR-кода
+            buy_funct.generate_qr_code(payment_url)
+            pixmap = QPixmap("payment_qr.png")
+            self.qrcode_display.setPixmap(pixmap)
+
+            self.check_buy_button = self.findChild(QPushButton, 'check_buy_button')
+            self.check_buy_button.clicked.connect(lambda: self.check_payment(payment_id))
+            self.exit_button = self.findChild(QPushButton, 'exit_button_from_list_file')
+            self.exit_button.clicked.connect(self.exit_from_window)
+        except Exception as e:
+            print(e)
+
+    def exit_from_window(self):
+        self.close()
+
+    # Проверка оплаты
+    def check_payment(self, payment_id):
+        payment_status = buy_funct.check_payment_status(payment_id)
+        if payment_status is not None:
+            if payment_status in 'pending':
+                self.status_bar.setText('ОЖИДАНИЕ')
+            elif payment_status in 'succeeded':
+                self.status_bar.setText('УСПЕШНО')
+                QTimer.singleShot(2000, lambda: self.show_dialog())
+        else:
+            self.status_bar.setText('Ошибка')
+
+    # Показ финального окна + закрытие предыдущих окон
+    def show_dialog(self):
+        for widget in QApplication.topLevelWidgets():
+            if isinstance(widget, QDialog) and widget.isVisible():
+                widget.close()
+        dialog = FinishMenu(self.file_path)
+        dialog.exec()
+
+
+class FinishMenu(QDialog):
+    def __init__(self, file_path):
+        super().__init__()
+        self.ui_mail = FinishDI()
+        self.ui_mail.setupUi(self)
+        self.showFullScreen()
+
+        try:
+            # Отправляем на печать
+            self.file_path = file_path
+            print_file(self.file_path)
+
+            load_dotenv()
+            self.folder = os.getenv('DIR_NAME')
+
+            buffer_dir = self.folder
+
+            # Проверяем, существует ли папка
+            if os.path.exists(buffer_dir):
+                # Удаляем все файлы и папки внутри buffer_dir
+                shutil.rmtree(buffer_dir)
+                # Создаем папку заново
+                os.makedirs(buffer_dir)
+        except Exception as e:
+            load_dotenv()
+            self.folder = os.getenv('DIR_NAME')
+
+            # Убедитесь, что buffer_dir определен
+            buffer_dir = self.folder  # Пример: выбираем buffer_dir из переменной folder
+
+            # Проверяем, существует ли папка
+            if os.path.exists(buffer_dir):
+                # Удаляем все файлы и папки внутри buffer_dir
+                shutil.rmtree(buffer_dir)
+                # Создаем папку заново
+                os.makedirs(buffer_dir)
+            print(f"Произошла ошибка при очистке папки: {e}")
+
+        # Таймер для автоматического закрытия окна через 5 секунд
+        QTimer.singleShot(5000, self.close)
 
 
 # Создаем класс для работы с основным окном

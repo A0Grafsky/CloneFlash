@@ -167,7 +167,7 @@ class SelectCopy(object):
                                         "background-color: rgb(57, 112, 70);\n"
                                         "}\n"
                                         "")
-        self.buy_button.setObjectName("right_button")
+        self.buy_button.setObjectName("buy_button")
         self.verticalLayout.addWidget(self.buy_button, 0,
                                       QtCore.Qt.AlignmentFlag.AlignHCenter | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.exit_button_from_print = QtWidgets.QPushButton(parent=Dialog)

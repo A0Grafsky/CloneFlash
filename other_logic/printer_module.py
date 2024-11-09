@@ -1,23 +1,3 @@
-# import os
-# import win32api
-# import win32print
-#
-#
-# def print_file(file_path):
-#     if os.path.isfile(file_path):
-#         # Получаем имя принтера
-#         printer_name = win32print.GetDefaultPrinter()
-#
-#         # Отправляем файл на печать
-#         win32api.ShellExecute(0, "print", file_path, None, ".", 0)
-#         print(f'Файл {file_path} отправлен на печать через принтер {printer_name}.')
-#     else:
-#         print(f'Файл {file_path} не найден!')
-#
-#
-# # Пример использования
-# print_file('C:\ArsenyBelykh\ProjectLavr\CloneFlash\ТЗ RealPet.pdf')
-
 import os
 import win32api
 import win32print
