@@ -22,6 +22,7 @@ from interface.view_file import ViewPrintObject2
 from interface.selecting_copies import SelectCopy
 from interface.check_buy import CheckBuyForPrint
 from interface.finish_menu import FinishDI
+from interface.help_menu import HelpUi
 
 # Сделанные модули
 from other_logic.email_read import EmailClient
@@ -408,6 +409,21 @@ class FinishMenu(QDialog):
         QTimer.singleShot(5000, self.close)
 
 
+# Окно помощи
+class HelpMenu(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.ui_mail = HelpUi()
+        self.ui_mail.setupUi(self)
+        self.showFullScreen()
+
+        self.exit_button = self.findChild(QPushButton, 'pushButton')
+        self.exit_button.clicked.connect(self.exit_window)
+
+    def exit_window(self):
+        self.close()
+
+
 # Создаем класс для работы с основным окном
 class ExpenseTracker(QMainWindow, QWidget):
     def __init__(self):
@@ -416,12 +432,18 @@ class ExpenseTracker(QMainWindow, QWidget):
         self.ui.setupUi(self)
         self.showFullScreen()
 
+        self.ui.help_button.clicked.connect(self.show_help_window)
+
         self.ui.flesh_button.clicked.connect(self.show_dialog)
         self.ui.email_button.clicked.connect(self.show_dialog_email)
 
     def show_dialog(self):
         dialog = Dialog()
         dialog.exec()
+
+    def show_help_window(self):
+        dialog_help = HelpMenu()
+        dialog_help.exec()
 
     def show_dialog_email(self):
         dialog_email = DialogEmail()
