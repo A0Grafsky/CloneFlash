@@ -82,7 +82,7 @@ class DialogEmail(QDialog):
         super().__init__()
         self.ui_mail = UiDialogEmailTest()
         self.ui_mail.setupUi(self)
-        self.showFullScreen()
+        # self.showFullScreen()
         # Аккаунт почты
         self.client = self.login_in_email()
 
@@ -153,7 +153,7 @@ class ViewPrint(QDialog):
         super().__init__()
         self.ui_mail = ViewPrintObject2()
         self.ui_mail.setupUi(self)
-        self.showFullScreen()
+        # self.showFullScreen()
 
         self.file_path = filepath
 
@@ -253,7 +253,7 @@ class PriceAndCopy(QDialog):
             super().__init__()
             self.ui_mail = SelectCopy()
             self.ui_mail.setupUi(self)
-            self.showFullScreen()
+            # self.showFullScreen()
 
             self.file_path = file_path
 
@@ -318,11 +318,12 @@ class CheckBuy(QDialog):
         super().__init__()
         self.ui_mail = CheckBuyForPrint()
         self.ui_mail.setupUi(self)
-        self.showFullScreen()
+        # self.showFullScreen()
         try:
             # Виджеты
             self.qrcode_display = self.findChild(QLabel, 'qrcode_photo')
             self.qrcode_display.setScaledContents(True)
+
 
             self.file_path = file_path
 
@@ -341,7 +342,7 @@ class CheckBuy(QDialog):
             self.exit_button = self.findChild(QPushButton, 'exit_button_from_list_file')
             self.exit_button.clicked.connect(self.exit_from_window)
         except Exception as e:
-            print(e)
+            print('ошибка в main')
 
     def exit_from_window(self):
         self.close()
@@ -372,7 +373,7 @@ class FinishMenu(QDialog):
         super().__init__()
         self.ui_mail = FinishDI()
         self.ui_mail.setupUi(self)
-        self.showFullScreen()
+        # self.showFullScreen()
 
         try:
             # Отправляем на печать

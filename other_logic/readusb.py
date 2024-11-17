@@ -12,18 +12,6 @@ def info_drive_usb():
                 return disk.Caption
 
 
-# def full_path_from_file(usb_drive, item):
-#     if not os.path.exists(usb_drive):
-#         print(f"USB drive {usb_drive} не найден.")
-#         return
-#     # Проходим по всем директориям и файлам на USB
-#     for root, dirs, files in os.walk(usb_drive):
-#         for file in files:
-#             file_path = os.path.join(root, file)
-#             if item in file_path:
-#                 return file_path
-
-
 def list_files_from_usb(usb_drive):
     mas_files = []
     if not os.path.exists(usb_drive):
